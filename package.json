@@ -1,0 +1,26 @@
+{
+  "name": "Paysmall",
+  "version": "1.0.0",
+  "description": "Paysmall ",
+  "author": "Ahamba solomon",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "@nuxtjs/auth": "^4.9.1",
+    "@nuxtjs/axios": "^5.9.7",
+    "@nuxtjs/pwa": "^3.0.0-0",
+    "awesome-phonenumber": "^2.30.0",
+    "nuxt": "^2.0.0",
+    "vue-tel-input": "^4.4.0",
+    "vue-youtube-embed": "^2.2.2",
+    "vuelidate": "^0.7.5"
+  },
+  "devDependencies": {
+    "@nuxtjs/vuetify": "^1.0.0"
+  }
+}
