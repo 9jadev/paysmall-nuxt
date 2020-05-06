@@ -1,7 +1,7 @@
 import colors from 'vuetify/es5/util/colors'
 
 export default {
-  mode: 'universal',
+  mode: 'spa',
   /*
   ** Headers of the page
   */
@@ -108,5 +108,13 @@ export default {
         client_secret: 'HmJmfSyvie1ASNufrhU9SeTjoRyklCXYKnyMPLnK'
       },
     }
+  },
+  env: {
+    upload_preset: process.env.upload_preset || 'x62tzib0',
+    cloudapi_key: process.env.cloudapi_key || '428216586742493',
+    cloudUrl: process.env.cloudUrl || 'https://api.cloudinary.com/v1_1/examqueat/image/upload',
+    accountVerify: process.env.accountVerify || 'https://api.ravepay.co/flwv3-pug/getpaidx/api/resolve_account',
+    PBFPubKey: process.env.PBFPubKey || 'FLWPUBK-b40c00896a8507cf67d23e1fe0b7cded-X',
+    Backend: process.env.Backend || 'http://127.0.0.1:8000'
   }
 }  

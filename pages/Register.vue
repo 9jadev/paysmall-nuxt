@@ -106,6 +106,12 @@ import { validationMixin } from 'vuelidate'
 import { required, minLength, maxLength, email , sameAs } from 'vuelidate/lib/validators'
 
 export default {
+  middleware ({ store, redirect }) {
+    // If the user is authenticated
+    if (store.state.auth.loggedIn) {
+      return redirect('/user')
+    }
+  },  
   mixins: [validationMixin],    
   layout: 'Join',
   data(){
@@ -180,7 +186,8 @@ export default {
   },
   methods: {
     home(){
-    window.location.assign("/");
+    // window.location.assign("/");
+       this.$router.push('/')
     },
     onInput(formattedNumber, { number, valid, country }) {
       this.phone.number = number.international;
@@ -190,7 +197,7 @@ export default {
         this.disabled = false
       }
     },
-    async submit(){
+    async submit( {store} ){
         this.$v.$touch();
         this.phone.valid 
         if (this.$v.formData.firstname.$invalid || this.$v.formData.lastname.$invalid || this.$v.formData.email.$invalid || this.$v.formData.password_confirmation.$invalid || this.$v.formData.password.$invalid || this.$v.formData.checkbox.$invalid) {
@@ -203,9 +210,7 @@ export default {
                 this.$axios.setHeader('Accept', 'application/json')  
                 await this.$axios.post('/register', this.formData).then((res)=> {
                     if(res.data.status == true) {
-                        // loginresponse =  this.$auth.loginWith('local', { data: { email: this.formData.email , password: this.formData.password} })
-                        // console.log(loginresponse);
-                        this.$router.push("/login");
+                        return redirect('/login')
                     }
                     
                     this.loading = false
