@@ -3,7 +3,7 @@
     <v-row cols="12">
         <v-col xs="12" sm="12" md="12" lg="12" xl="12" class="logo_header" @click="home"> 
             <v-avatar>
-                <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John">
+                <img src="~/assets/MAIN.png" alt="John">
             </v-avatar> 
         </v-col>
     </v-row>

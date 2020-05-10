@@ -3,7 +3,7 @@
     <v-row cols="12">
         <v-col xs="12" sm="12" md="12" lg="12" xl="12" class="logo_header" @click="home"> 
             <v-avatar>
-                <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John">
+                <img src="~/assets/MAIN.png" alt="John">
             </v-avatar> 
         </v-col>
     </v-row>
@@ -148,13 +148,13 @@ export default {
       formData: {
           firstname: {
               required,
-              minLength: minLength(5),
-              maxLength: maxLength(12)
+              minLength: minLength(3),
+              maxLength: maxLength(25)
           },
           lastname: {
               required,
-              minLength: minLength(5),
-              maxLength: maxLength(12)
+              minLength: minLength(3),
+              maxLength: maxLength(25)
           },
           email: {
               required,
@@ -231,16 +231,16 @@ export default {
       firstnameErrors () {
         const errors = [] 
         if (!this.$v.formData.firstname.$dirty) return errors
-        !this.$v.formData.firstname.maxLength && errors.push(`first name must be at most 12 characters long`)
-        !this.$v.formData.firstname.minLength && errors.push(`first name must be at least 5 characters long`)
+        !this.$v.formData.firstname.maxLength && errors.push(`first name must be at most 25 characters long`)
+        !this.$v.formData.firstname.minLength && errors.push(`first name must be at least 3 characters long`)
         !this.$v.formData.firstname.required && errors.push('first name is required.')
         return errors
       },
       lastnameErrors () {
         const errors = []
         if (!this.$v.formData.lastname.$dirty) return errors
-        !this.$v.formData.lastname.maxLength && errors.push(`last name must be at most 12 characters long`)
-        !this.$v.formData.lastname.minLength && errors.push(`last name must be at least 5 characters long`)
+        !this.$v.formData.lastname.maxLength && errors.push(`last name must be at most 25 characters long`)
+        !this.$v.formData.lastname.minLength && errors.push(`last name must be at least 3 characters long`)
         !this.$v.formData.lastname.required && errors.push('last name is required.')
         return errors
       },

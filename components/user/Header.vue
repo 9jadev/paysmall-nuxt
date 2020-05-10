@@ -3,7 +3,7 @@
      <v-navigation-drawer v-model="drawer" app>
       <v-list dense> 
         <v-list-item link>
-          <v-list-item-action>
+          <v-list-item-action @click="home">
             <v-icon>mdi-home</v-icon>
           </v-list-item-action>
           <v-list-item-content>
@@ -31,14 +31,40 @@
 
     <v-app-bar app color="#fff">
         <v-avatar>
-            <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John">
+            <img src="~/assets/MAIN.png" alt="John">
         </v-avatar>   
         <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
         <v-toolbar-title> Paysmall</v-toolbar-title>
         <v-spacer></v-spacer>
         <v-avatar>
-            <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John">
+          <span class="success--text headline" v-if="!this.$store.state.business.business_image">NA</span>  
+          <img :src="this.$store.state.business.business_image" v-else alt="Logo">
         </v-avatar> 
+        <div class="text-center">
+          <v-menu open-on-hover buttom offset-y>
+            <template v-slot:activator="{ on }">
+              <v-icon  v-on="on">mdi-chevron-down</v-icon>
+            </template>
+
+            <v-list>
+              <v-list-item>
+                <v-list-item-title @click="home"> Home </v-list-item-title>
+              </v-list-item>
+            </v-list>
+
+            <v-list>
+              <v-list-item>
+                <v-list-item-title @click="profile"> Profile </v-list-item-title>
+              </v-list-item>
+            </v-list>
+
+            <v-list>
+              <v-list-item>
+                <v-list-item-title> Logout </v-list-item-title>
+              </v-list-item>
+            </v-list>
+          </v-menu>
+        </div>
     </v-app-bar>
 
 
@@ -56,6 +82,12 @@ export default {
         async logout (){
           this.$store.commit('RESET_BUSINESS')
           await this.$auth.logout()
+        },
+        profile () {
+          this.$router.push('profile')
+        },
+        home () {
+          this.$router.push('user')
         }
     }
 }
