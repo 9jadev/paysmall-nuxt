@@ -3,8 +3,9 @@ import colors from 'vuetify/es5/util/colors'
 export default {
   mode: 'spa',
   generate: {
+    fallback: true,
     routes: [
-      '/ResetPassword/token',
+      '/ResetPassword/token'
     ]
   },
   /*
