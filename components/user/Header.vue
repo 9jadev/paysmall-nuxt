@@ -60,7 +60,7 @@
 
             <v-list>
               <v-list-item>
-                <v-list-item-title> Logout </v-list-item-title>
+                <v-list-item-title  @click="logout"> Logout </v-list-item-title>
               </v-list-item>
             </v-list>
           </v-menu>

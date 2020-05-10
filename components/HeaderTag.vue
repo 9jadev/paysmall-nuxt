@@ -33,6 +33,13 @@
                 </v-list-item-action>
                 <v-list-item-title>Switch drawer (click me)</v-list-item-title>
                 </v-list-item>
+                <v-list-item >
+                    <v-list-item-action>
+                    </v-list-item-action>
+                    <v-list-item-title>
+                        <nuxt-link to="/Login" class="link"> Login  </nuxt-link>
+                    </v-list-item-title>
+                </v-list-item>
             </v-list>
         </v-navigation-drawer>
     </div>
