@@ -140,7 +140,6 @@ export default {
             },
             account_number: {
                 required,
-                numeric,
                 minLength: minLength(10),
             },
             bank_name: {
@@ -277,7 +276,6 @@ export default {
         const errors = []
         if (!this.$v.formData.account_number.$dirty) return errors
         !this.$v.formData.account_number.minLength && errors.push(`Bank account number must be at least 10 characters.`)
-        !this.$v.formData.account_number.numeric && errors.push(`Bank account number must be a numeric characters only.`)
         !this.$v.formData.account_number.required && errors.push('Bank account number is required.')
         return errors
       },

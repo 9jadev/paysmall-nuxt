@@ -48,13 +48,17 @@
 
             <v-list>
               <v-list-item>
-                <v-list-item-title @click="home"> Home </v-list-item-title>
+                <v-list-item-title @click="home"> 
+                  <nuxt-link to="/user" class="link"> Home  </nuxt-link>
+                </v-list-item-title>
               </v-list-item>
             </v-list>
 
             <v-list>
               <v-list-item>
-                <v-list-item-title @click="profile"> Profile </v-list-item-title>
+                <v-list-item-title>
+                 <nuxt-link to="/profile" class="link"> Profile  </nuxt-link>
+                </v-list-item-title>
               </v-list-item>
             </v-list>
 
