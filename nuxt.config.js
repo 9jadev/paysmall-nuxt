@@ -2,6 +2,9 @@ import colors from 'vuetify/es5/util/colors'
 
 export default {
   mode: 'spa',
+  generate: {
+    fallback: true
+  },
   /*
   ** Headers of the page
   */
@@ -53,7 +56,7 @@ export default {
   ** See https://axios.nuxtjs.org/options
   */
   axios: {
-    baseURL: 'http://127.0.0.1:8000/api',
+    baseURL: 'https://smallpay.herokuapp.com/api',
   },
   /*
   ** vuetify module configuration
