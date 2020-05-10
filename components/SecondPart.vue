@@ -2,7 +2,7 @@
     <v-container class=" top" fluid>
         <h4 class="text-center display-2 font-weight-bold" style="color: #022B69;">  Three easy steps for starting. </h4>
         <p style="margin-top: 44px;"></p>
-        <v-row class="ml-10 mr-10">
+        <v-row class="">
             <v-col cols="12" sm="4" md="4" xs="12" class="item">
                 <v-card class="pa-2 card-item" shaped>
                     <v-card-title>

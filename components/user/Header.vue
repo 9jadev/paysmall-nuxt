@@ -100,4 +100,8 @@ export default {
 .top {
     background: rgb(244, 247, 250);
 }
+.link{
+  text-decoration: none;
+  color: black;
+}
 </style>
