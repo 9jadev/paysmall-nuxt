@@ -105,6 +105,6 @@ export default {
         margin-bottom: 0px;
     }
     .text-color{
-        color: white;
+        color: #42a5f5;
     }
 </style>
