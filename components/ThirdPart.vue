@@ -107,4 +107,7 @@ export default {
     .text-color{
         color: white;
     }
+    .theme--light .v-stepper {
+        background: inherit;
+    }
 </style>
