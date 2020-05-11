@@ -215,7 +215,7 @@ export default {
                     
                     this.loading = false
                 }).catch(( error )=> {
-                    console.log(error.response.data);
+                    // console.log(error.response.data);
                     this.errors = error.response.data
                     this.errorsnackbar = true
                     this.errormess = error.response.data.message

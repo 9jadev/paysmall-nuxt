@@ -48,7 +48,7 @@
 
             <v-list>
               <v-list-item>
-                <v-list-item-title @click="home"> 
+                <v-list-item-title> 
                   <nuxt-link to="/user" class="link"> Home  </nuxt-link>
                 </v-list-item-title>
               </v-list-item>
