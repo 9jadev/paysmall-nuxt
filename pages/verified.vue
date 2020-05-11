@@ -1,14 +1,16 @@
 <template>
-    <div></div>
+    <!-- <no-ssr placeholder="loading..."> -->
+        <div></div>
+    <!-- </no-ssr>     -->
 </template>
 <script>
 export default {
     created() {
         if (this.$store.state.auth.loggedIn) {
             this.$auth.fetchUser()
-            window.location.assign('/user')
+            this.$router.push('/user')
         }
-        window.location.assign('/user')
+        this.$router.push('/user')
     }
 }
 </script>

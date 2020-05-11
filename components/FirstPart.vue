@@ -5,9 +5,9 @@
                 <v-col cols="12" md="12" lg="12" sm="12" xs="12" xl="12" >
                     <div class="text-center mt-60">
                         <h4 class="font-weight-light display-2 mb-2">Recieve Pay,
-                        <br>Make Pay <br> Instulmentally</h4>
+                        <br>Make Pay <br> On Installment </h4>
                         <p class="text--secondary font-weight-light mt-10 pl">
-                          give you customer the flexiblity to pay for your produce or service instumentally , <br />  Paysmall is the smartest way to get instulmental payment. 
+                          give you customer the flexiblity to pay for your produce or service instumentally , <br />  Paysmall is the smartest way to get Installmental payment. 
                         </p>
                       <div v-if="!this.$auth.loggedIn">
                         <v-btn outlined color="indigo" class="ml-2 mr-2" @click="login"> Login </v-btn>

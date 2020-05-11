@@ -31,7 +31,9 @@
                             </v-col>
                             <v-col cols="12" sm="12" xs="12">
                                 <!-- <v-text-field label="Phone" v-model="formData.phone" outlined clearable></v-text-field> -->
-                                <vue-tel-input v-model="formData.phone"  @input="onInput" :valid-characters-only="true" mode="international" required></vue-tel-input>
+                                <no-ssr placeholder="loading...">
+                                    <vue-tel-input v-model="formData.phone"  @input="onInput" :valid-characters-only="true" mode="international" required></vue-tel-input>
+                                </no-ssr>    
                                 <div class="errors" v-if="errors">
                                     <p class="red--text text--lighten-1 mb-1" :key="index" v-for="(error , index) in errors.errors.phone">{{error}} </p>
                                 </div>
@@ -210,12 +212,11 @@ export default {
                 this.$axios.setHeader('Accept', 'application/json')  
                 await this.$axios.post('/register', this.formData).then((res)=> {
                     if(res.data.status == true) {
-                        return redirect('/login')
-                    }
-                    
+                        this.$router.push('/login')
+                    }                    
                     this.loading = false
-                }).catch(( error )=> {
-                    // console.log(error.response.data);
+                }).catch(( error ) => {
+                    console.log(error);
                     this.errors = error.response.data
                     this.errorsnackbar = true
                     this.errormess = error.response.data.message
