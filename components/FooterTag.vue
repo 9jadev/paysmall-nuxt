@@ -1,38 +1,38 @@
 <template>
-  <v-footer dark absolute :fixed="fixed" padless>
-    <v-card flat tile  class="blue lighten-1 white--text text-center">
-      <v-card-text>
-        <v-btn  class="mx-4 white--text" icon>
-          <v-icon large color="white">mdi-facebook</v-icon>
-        </v-btn>
-        <v-btn  class="mx-4 white--text" icon>
-          <v-icon large color="white">mdi-twitter</v-icon>
-        </v-btn>
-        <v-btn  class="mx-4 white--text" icon>
-          <v-icon large color="white">mdi-instagram</v-icon>
-        </v-btn>
-        <v-btn  class="mx-4 white--text" icon>
-          <v-icon large color="white">mdi-linkedin</v-icon>
-        </v-btn>
-      </v-card-text>
-
-      <v-card-text class="white--text pt-0">
-        Phasellus feugiat arcu sapien, et iaculis ipsum elementum sit amet. Mauris cursus commodo interdum. Praesent ut risus eget metus luctus accumsan id ultrices nunc. Sed at orci sed massa consectetur dignissim a sit amet dui. Duis commodo vitae velit et faucibus. Morbi vehicula lacinia malesuada. Nulla placerat augue vel ipsum ultrices, cursus iaculis dui sollicitudin. Vestibulum eu ipsum vel diam elementum tempor vel ut orci. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-      </v-card-text>
-
-      <v-divider></v-divider>
-
-      <v-card-text class="white--text">
-       <strong> &copy; Paysmall</strong> {{ new Date().getFullYear() }}
-      </v-card-text>
-    </v-card>
+  <v-footer color="primary lighten-1" padless >
+    <v-row justify="center" no-gutters>
+      <!-- <v-btn
+        v-for="link in links"  :key="link"  color="white"  text  rounded  class="my-2">
+        {{ link }}
+      </v-btn> -->
+      <p class="white--text pt-0 pl-4 pr-4">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime itaque saepe at similique quas mollitia
+          id, quidem nemo minima perspiciatis, ea earum consequuntur ratione dolorum nobis modi cupiditate
+          autem aspernatur?
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro eligendi a repellat corporis, dignissimos corrupti voluptas minus odit officiis nihil vitae eveniet culpa inventore architecto recusandae ab similique dicta delectus.
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime itaque saepe at similique quas mollitia
+          id, quidem nemo minima perspiciatis, ea earum consequuntur ratione dolorum nobis modi cupiditate
+          autem aspernatur?
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro eligendi a repellat corporis, dignissimos corrupti voluptas minus odit officiis nihil vitae eveniet culpa inventore architecto recusandae ab similique dicta delectus.
+      </p>
+      <v-col  class="primary lighten-2 py-4 text-center white--text"  cols="12">
+        {{ new Date().getFullYear() }} — <strong>Paysmall</strong>
+      </v-col>
+    </v-row>
   </v-footer>
 </template>
 <script>
   export default {
     data(){
         return {
-            fixed: true
+            links: [
+            'Home',
+            'About Us',
+            'Team',
+            'Services',
+            'Blog',
+            'Contact Us',
+          ]
         }
     }
   }

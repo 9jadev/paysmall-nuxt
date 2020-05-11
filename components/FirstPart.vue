@@ -1,7 +1,7 @@
 <template>
     <v-container fluid class="pad">
-        <v-parallax dark src="https://image.shutterstock.com/image-photo/large-window-into-white-office-600w-143411113.jpg">
-            <v-row style="margin-top: 30px;"  align-content="center">
+        <v-parallax dark src="https://cdn.vuetifyjs.com/images/backgrounds/vbanner.jpg">
+            <v-row style="margin-top: 10px;" class="mb-8" align-content="center">
                 <v-col cols="12" md="12" lg="12" sm="12" xs="12" xl="12" >
                     <div class="text-center mt-60">
                         <h4 class="font-weight-light display-2 mb-2">Recieve Pay,
