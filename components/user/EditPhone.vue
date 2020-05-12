@@ -11,7 +11,9 @@
             </v-chip>
         </v-col>
         <v-col cols="12" xs="12" md="6" sm="6" lg="6">
-            <vue-tel-input  @input="onInput" v-model="phone.number" :disabled="togglestate" :valid-characters-only="true" mode="international" required></vue-tel-input>
+            <no-ssr placeholder="loading...">
+                <vue-tel-input  @input="onInput" v-model="phone.number" :disabled="togglestate" :valid-characters-only="true" mode="international" required></vue-tel-input>
+            </no-ssr>
         </v-col>  
         
         <v-col cols="12" xs="12" sm="6" md="6" lg="6" v-if="!togglestate">
