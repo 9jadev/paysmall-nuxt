@@ -11,14 +11,14 @@
                             <edit-email :togglestate="edit"></edit-email>
                             <edit-phone :togglestate="edit"></edit-phone>
                             <v-divider inset></v-divider>
-                            <v-btn block color="primary" @click="edit = true" v-if="!edit" dark>SHOW</v-btn>
+                            <v-btn block color="primary" @click="edit = true" v-if="edit" dark>SHOW</v-btn>
                             <v-btn block color="primary" @click="edit = false" v-else dark>EDIT</v-btn>
                         </v-container>
                     </v-tab-item>
                     <v-tab-item>
                         <v-card flat>
                             <v-card-text>
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor quidem placeat velit, asperiores libero temporibus nulla amet inventore veritatis, suscipit voluptatibus reprehenderit quas ex? Placeat cupiditate esse dolores praesentium recusandae!
+                                <edit-buisness :banks="banks"></edit-buisness>
                             </v-card-text>
                         </v-card>
                     </v-tab-item>
@@ -32,11 +32,19 @@ import CheckVerified from '~/components/user/CheckVerified.vue'
 import EditUsername from '~/components/user/EditUsername.vue'
 import EditEmail from '~/components/user/EditEmail.vue'
 import EditPhone from '~/components/user/EditPhone.vue'
+import EditBuisness from '~/components/user/EditBuisness.vue'
 export default {
     middleware: 'auth',
     layout: 'user',
     loading: {
         color: 'blue',
+    },
+     async asyncData (context) {
+        let res = await context.$axios.get(`https://api.ravepay.co/v2/banks/NG?public_key=${process.env.PBFPubKey}`)
+        let banks = res.data.data.Banks
+        return {
+            banks
+        }
     },
     async fetch({$axios, store, redirect }){
         $axios.setHeader('Accept', 'application/json')
@@ -70,7 +78,7 @@ export default {
         }) 
     },
     components: {
-        CheckVerified , EditUsername , EditEmail , EditPhone
+        CheckVerified , EditUsername , EditEmail , EditPhone , EditBuisness
     }
 }
 </script>

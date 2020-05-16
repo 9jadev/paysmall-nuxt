@@ -1,7 +1,7 @@
 import colors from 'vuetify/es5/util/colors'
 
 export default {
-  mode: 'universal',
+  mode: 'spa',
   generate: {
     fallback: true,
     routes: [
@@ -59,7 +59,7 @@ export default {
   ** See https://axios.nuxtjs.org/options
   */
   axios: {
-    baseURL: 'https://smallpay.herokuapp.com/api',
+    baseURL: 'https://smallpay.netlify.app/api',
   },
   /*
   ** vuetify module configuration

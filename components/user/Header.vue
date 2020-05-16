@@ -57,7 +57,7 @@
             <v-list>
               <v-list-item>
                 <v-list-item-title>
-                 <nuxt-link to="/profile" class="link"> Profile  </nuxt-link>
+                 <nuxt-link to="/user/profile" class="link"> Profile  </nuxt-link>
                 </v-list-item-title>
               </v-list-item>
             </v-list>
@@ -88,7 +88,7 @@ export default {
           await this.$auth.logout()
         },
         profile () {
-          this.$router.push('profile')
+          this.$router.push('user/profile')
         },
         home () {
           this.$router.push('user')
