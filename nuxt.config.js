@@ -59,7 +59,7 @@ export default {
   ** See https://axios.nuxtjs.org/options
   */
   axios: {
-    baseURL: 'http://smallpay.herokuapp.com/api',
+    baseURL: 'https://smallpay.herokuapp.com/api',
   },
   /*
   ** vuetify module configuration
