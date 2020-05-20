@@ -6,14 +6,20 @@
                     <v-tab>User</v-tab>
                     <v-tab>Business</v-tab>
                     <v-tab-item>
-                        <v-container>
-                            <edit-username :togglestate="edit"></edit-username>
-                            <edit-email :togglestate="edit"></edit-email>
-                            <edit-phone :togglestate="edit"></edit-phone>
-                            <v-divider inset></v-divider>
-                            <v-btn block color="primary" @click="edit = true" v-if="edit" dark>SHOW</v-btn>
-                            <v-btn block color="primary" @click="edit = false" v-else dark>EDIT</v-btn>
-                        </v-container>
+                        <v-card flat>
+                            <v-card-text>
+                                <v-card outlined>
+                                    <v-container>
+                                        <edit-username :togglestate="edit"></edit-username>
+                                        <edit-email :togglestate="edit"></edit-email>
+                                        <edit-phone :togglestate="edit"></edit-phone>
+                                        <v-divider inset></v-divider>
+                                        <v-btn block color="primary" @click="edit = !edit" v-if="edit" dark>EDIT</v-btn>
+                                        <v-btn block color="primary" @click="edit = !edit" v-else dark>SHOW</v-btn>
+                                    </v-container>
+                                </v-card>    
+                            </v-card-text>    
+                        </v-card>    
                     </v-tab-item>
                     <v-tab-item>
                         <v-card flat>
@@ -78,7 +84,7 @@ export default {
         }) 
     },
     components: {
-        CheckVerified , EditUsername , EditEmail , EditPhone , EditBuisness
+        CheckVerified , EditUsername , EditEmail , EditPhone , EditBuisness 
     }
 }
 </script>

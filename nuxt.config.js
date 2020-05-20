@@ -60,6 +60,8 @@ export default {
   */
   axios: {
     baseURL: 'https://smallpay.herokuapp.com/api',
+    // baseURL: 'http://127.0.0.1:8000/api',
+    // baseURL: 'https://smallpaystage.herokuapp.com/api',
   },
   /*
   ** vuetify module configuration

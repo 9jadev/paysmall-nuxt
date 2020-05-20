@@ -18,6 +18,9 @@
         </v-col>
         <v-col cols="12" xs="12" sm="4" md="4" lg="4">
             <v-text-field label="Last name" v-model.trim="formData.lastname" placeholder="lastname" :error-messages="lastnameErrors" required @input="$v.formData.lastname.$touch()" @blur="$v.formData.lastname.$touch()" color="success" :loading="loading" :success="success" :disabled="togglestate" outlined clearable></v-text-field>
+            <div class="errors" v-if="errors">
+                <p class="red--text text--lighten-1 mb-1" :key="index" v-for="(error , index) in errors.errors.lastname">{{error}} </p>
+            </div>
         </v-col>
         <v-col cols="12" xs="12" sm="4" md="4" lg="4">
             <v-btn large class="ma-2" v-if="!togglestate" :loading="loading" @click="submit()" outlined color="indigo">submit</v-btn>

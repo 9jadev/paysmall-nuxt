@@ -4,8 +4,7 @@
             <v-container>
                 <v-row align="center" justify="center">
                     <v-img
-                    :src="this.image"
-                    lazy-src="https://picsum.photos/id/11/100/60"
+                    :src="this.$store.state.business.business_image"
                     aspect-ratio="1"
                     max-width="300"
                     max-height="300"
@@ -21,19 +20,8 @@
                     </template>
                     </v-img>
                 </v-row>
-                <v-row align="center" justify="center">
-                    <h1 class="title">{{ this.$store.state.business.business_name }}</h1>
-                </v-row>
+                <edit-business-name></edit-business-name>
                 <v-row>
-                    <v-col cols="12" sm="12" xs="12">
-                        <div class="errors mb-8" v-if="errormess">
-                            <p class="red--text text--lighten-1 mb-1">{{errormess}} </p>
-                        </div>
-                        <v-text-field label="Business name" :error-messages="business_nameErrors"  required @input="$v.formData.business_name.$touch()" @blur="$v.formData.business_name.$touch()" :loading="loading" color="success" value="" :disabled="toggler" v-model.trim="formData.business_name"  outlined clearable></v-text-field>
-                        <div class="errors" v-if="errors">
-                            <p class="red--text text--lighten-1 mb-1" :key="index" v-for="(error , index) in errors.errors.business_name">{{error}} </p>
-                        </div>
-                    </v-col>
                     <v-col cols="12" sm="12" xs="12">
                         <v-select :items="['ol','or']" v-model.trim="formData.business_type" :error-messages="business_typeErrors" required @input="$v.formData.business_type.$touch()" @blur="$v.formData.business_type.$touch()" label="Business type" color="success" height="55" value="" :disabled="toggler" :loading="loading" dense clearable outlined></v-select>
                         <div class="errors" v-if="errors">
@@ -55,9 +43,6 @@
                             <p class="red--text text--lighten-1 mb-1" :key="index" v-for="(error , index) in errors.errors.account_number">{{error}} </p>
                         </div>
                     </v-col>
-                    <!-- <v-col cols="12" sm="12" xs="12">
-                        <v-text-field label="Business Logo" @change="print()" :counter="12" required color="success" v-model.trim="formData.business_image"  outlined clearable></v-text-field>
-                    </v-col> -->
                     <v-col cols="12" sm="12" xs="12">
                         <v-file-input v-model="image" accept="image/png, image/jpeg, image/bmp" placeholder="Pick an logo" prepend-icon="mdi-camera" :loading="loading || loadingimg" @change="cloudnary()" label="Logo" :error-messages="business_imageErrors" :disabled="toggler" @input="$v.formData.business_image.$touch()" @blur="$v.formData.business_image.$touch()" outlined color="success" :show-size="1000">
                         <template v-slot:selection="{ index, text }">
@@ -81,22 +66,18 @@
 
                     <v-col cols="12" sm="12" xs="12">
                         <v-card-actions>
-                            <v-btn color="primary" :elevation="18" v-if="!toggler" :loading="loading || loadingimg" @click="submit" large dark>Submit</v-btn>
+                            <v-btn color="primary" :elevation="6" v-if="!toggler" :disabled="loading"  :loading="loading || loadingimg" @click="submit" large dark>Submit</v-btn>
 
-                            <v-btn color="green" :elevation="18" v-if="toggler" @click="toggling" large dark> EDIT </v-btn>
-                            <v-btn color="green" :elevation="18" v-else @click="toggling" large dark> SHOW </v-btn>
+                            <v-btn color="green" :elevation="18" v-if="toggler" @click="toggler = false" large dark> EDIT </v-btn>
+                            <v-btn color="green" :elevation="18" v-else @click="toggler = true" large dark> Read Only </v-btn>
                         </v-card-actions>
                     </v-col>
-                    <v-dialog v-model="dialog" persistent max-width="290">
+                    <v-dialog v-model="dialog" max-width="290">
                         <v-card>
                             <v-card-title class="headline"></v-card-title>
                             <v-card-text>
-                                Dear {{ this.$store.state.auth.user.firstname }} {{ this.$store.state.auth.user.lastname }} , You have successfully created your business.
+                                Dear {{ this.$store.state.auth.user.firstname }} {{ this.$store.state.auth.user.lastname }} , You have successfully updated your business.
                                 </v-card-text>
-                            <v-card-actions>
-                            <v-spacer></v-spacer>
-                                <v-btn color="green darken-1" text @click="home">Continue</v-btn>
-                            </v-card-actions>
                         </v-card>
                     </v-dialog>
                 </v-row>
@@ -109,7 +90,8 @@ import Axios from 'axios';
 import { validationMixin } from 'vuelidate'
 import { required, minLength, maxLength , numeric } from 'vuelidate/lib/validators'
 import { mapMutations } from 'vuex'
-import CheckVerified from '~/components/user/CheckVerified.vue'
+import { mapActions } from 'vuex'
+import EditBusinessName from '~/components/user/EditBusinessName.vue'
 export default {
     mixins: [validationMixin],  
     props: ['banks'],
@@ -144,9 +126,10 @@ export default {
             loadingimg: false,
             bank: { Name: this.$store.state.business.bank_name, Code: this.$store.state.business.bank_code },
             timeout: 4000,
-            toggler: false,
-            image: this.$store.state.business.business_image,
+            toggler: true,
+            image: ' ',
             formData: {
+                id: this.$store.state.business.id,
                 user_id: this.$store.state.auth.user.id,
                 business_name: this.$store.state.business.business_name,
                 business_type: this.$store.state.business.business_type,
@@ -160,11 +143,15 @@ export default {
             snackbar: false,
             erroraccount: '',
             errors: null,
-            errormess: ''   
+            errormess: '',
+            status: null   
         }
     },
     methods: {
-        submit(){
+        ...mapActions([
+            'updateBusness',
+        ]),
+        async submit({store , params}){
             this.erroraccount = ''
             this.snackbartext = ''
             this.errors = null
@@ -177,7 +164,7 @@ export default {
                 this.loading = false
             } else {
                 
-                let response = Axios.post(process.env.accountVerify, {
+                Axios.post(process.env.accountVerify, {
                     "recipientaccount": this.formData.account_number,
                     "destbankcode": this.formData.bank_code,
                     "PBFPubKey": process.env.PBFPubKey,
@@ -185,7 +172,8 @@ export default {
                     "country":"NG"
                 }).then( res => {
                     if (res.data.data.data.accountnumber != null) {
-                        let status = res.data.data.data.accountnumber 
+                        this.commited(this.formData);
+                        this.loading = false;
                     } else {
                         this.snackbartext = `Account number ${this.formData.account_number} does'nt exist for ${this.formData.bank_name}`
                         this.erroraccount = `Account number ${this.formData.account_number} does'nt exist for ${this.formData.bank_name}`
@@ -201,30 +189,24 @@ export default {
                     this.loading = false
                 });
 
-                if (status != null) {
-                    this.$axios.setHeader('Accept', 'application/json') 
-                    this.$axios.post('/businesses', this.formData).then((res)=> {
-                        this.loading = false
-                        this.dialog = true
-                    }).catch((error) => {
-                        console.log(error.response.data);
-                        this.errors = error.response.data
-                        this.errorsnackbar = true
-                        this.errormess = error.response.data.message
-                        this.loading = false
-                    })                   
+                if (this.status != null) {
+                    
+                    // this.loading = false
                 }
             }
         },  
-        async cloudnary(){
+        update(dar){
+            console.log("fu")
+        },
+        cloudnary(){
             this.loadingimg = true
             const form = new FormData();
             form.append('file', this.image);
             form.append('upload_preset', process.env.upload_preset);
             form.append('api_key', process.env.cloudapi_key); 
-            let response = await Axios.post(process.env.cloudUrl, form).then( res => {
+            let response = Axios.post(process.env.cloudUrl, form).then( res => {
                 // console.log(res.data.secure_url)
-                this.formData.business_image = res.data.secure_url 
+                // this.formData.business_image = res.data.secure_url 
                 this.image = res.data.secure_url 
                 this.loadingimg = false   
             }).catch((err) => {
@@ -239,6 +221,20 @@ export default {
         },
         toggling () {
             this.toggler = !this.toggler
+        },
+        commited(payload){
+            this.$axios.setHeader('Accept', 'application/json') 
+            this.$axios.put(`/businesses/${payload.id}`, payload).then((res)=> {
+                console.log(res.data.business)
+                this.$store.dispatch('updateBusness', res.data.business);
+                this.dialog = true
+            }).catch((error) => {
+                console.log(error.response.data);
+                this.errors = error.response.data
+                this.errorsnackbar = true
+                this.errormess = error.response.data.message
+                this.loading = false
+            })
         }
     },
     mounted() {
@@ -292,7 +288,13 @@ export default {
         bank: function (){
             this.formData.bank_name = this.bank.Name
             this.formData.bank_code = this.bank.Code
+        },
+        image: function (){
+            this.formData.business_image = this.image
         }
+    },
+    components: {
+        EditBusinessName
     }
 }
 </script>
