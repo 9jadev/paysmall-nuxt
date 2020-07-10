@@ -44,9 +44,9 @@
         <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
         <v-toolbar-title> Paysmall</v-toolbar-title>
         <v-spacer></v-spacer>
-        <v-avatar>
-          <span class="success--text headline" v-if="!this.$store.state.business.business_image">NA</span>  
-          <img :src="this.$store.state.business.business_image" v-else alt="Logo">
+        <v-avatar>  
+          <img :src="this.$store.state.business.business_image" v-if="this.$store.state.business.business_image" alt="Logo">
+          <span class="success--text headline" v-else>NA</span>
         </v-avatar> 
         <div class="text-center">
           <v-menu open-on-hover buttom offset-y>
