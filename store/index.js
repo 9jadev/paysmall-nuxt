@@ -1,16 +1,37 @@
 export const state = () => ({
-    business: {}
+    business: [],
+    contacts: []
 })
 
+export const getters = {
+    contactlist: (state) => {
+        let num = 1;
+        let contact = [];
+        let Scontact = state.contacts;
+        Scontact.forEach(element => {
+            element.did = num;
+            contact.unshift(element);
+            num++;
+        });
+      return Scontact;
+    }
+}
 export const mutations = {
     SET_BUSINESS(state, business) {
         state.business = business
+    },
+    SET_CONTACT(state, contacts) {
+        state.contacts = contacts
     },
     RESET_BUSINESS(state) {
         state.business = {}
     },
     UPDATE_BUSINESS(state, payload) {
         Object.assign(state.business, payload);
+    },
+    UPDATECON(state, payload){
+        // console.log(payload)
+        state.contacts.unshift(payload);
     }
 }
 
@@ -29,5 +50,8 @@ export const  actions = {
         //     this.loading = false
         // })  
         console.log("i just commited")
+    },
+    updateCon({commit}, payload){
+        commit('UPDATECON',payload)
     }
 }

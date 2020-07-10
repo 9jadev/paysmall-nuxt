@@ -37,7 +37,8 @@ export default {
   */
   plugins: [
     '~/plugins/vue-tel-input',
-    {src: '~/plugins/vuelidate', mode: 'client'}
+    {src: '~/plugins/vuelidate', mode: 'client'},
+    { src: '~/plugins/vuex-persist', ssr: false }
   ],
   /*
   ** Nuxt.js dev-modules
@@ -115,7 +116,12 @@ export default {
         client_id: '1',
         client_secret: 'HmJmfSyvie1ASNufrhU9SeTjoRyklCXYKnyMPLnK'
       },
-    }
+    },
+    redirect: {
+      login: '/Login',
+      logout: '/Login',
+      home: '/user'
+    },
   },
   env: {
     upload_preset: process.env.upload_preset || 'x62tzib0',

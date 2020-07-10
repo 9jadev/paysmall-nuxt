@@ -121,6 +121,7 @@ export default {
             } else {
                 // console.log(result.business);
                 store.commit('SET_BUSINESS', result.business)
+                store.commit('SET_CONTACT', result.contacts)
             }
         })
     },

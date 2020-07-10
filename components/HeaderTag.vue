@@ -13,7 +13,7 @@
                 <v-btn large text> Contact us </v-btn>
             </div>
             <v-spacer></v-spacer>
-            <div class="hidden-xs-only hidden-sm-only hidden-md-only" v-if="!this.$auth.loggedIn">
+            <div class="hidden-xs-only hidden-sm-only hidden-md-only" v-if="this.$auth.loggedIn == false">
                 <v-btn outlined color="indigo" class="ml-2 mr-2" :nuxt="true"> <nuxt-link to="/login" class="link">Login</nuxt-link> </v-btn>
                 <v-btn color="success" :nuxt="true"><nuxt-link to="/register" class="link">REGISTER IT'S FREE</nuxt-link></v-btn>
             </div>

@@ -22,7 +22,9 @@
     "vue-picture-input": "^2.1.6",
     "vue-tel-input": "^4.4.0",
     "vue-youtube-embed": "^2.2.2",
-    "vuelidate": "^0.7.5"
+    "vuelidate": "^0.7.5",
+    "vuex-persist": "^2.2.0",
+    "vuex-persistedstate": "^3.0.1"
   },
   "devDependencies": {
     "@nuxtjs/vuetify": "^1.0.0"

@@ -3,14 +3,21 @@
      <v-navigation-drawer v-model="drawer" app>
       <v-list dense> 
         <v-list-item link>
-          <v-list-item-action @click="home">
-            <v-icon>mdi-home</v-icon>
+          <!-- <nuxt-link to="/user">
+          </nuxt-link> -->
+          <v-list-item-action>
+            <nuxt-link to="/user">
+              <v-icon>mdi-home</v-icon>
+            </nuxt-link>  
           </v-list-item-action>
           <v-list-item-content>
-            <v-list-item-title>Home</v-list-item-title>
+            <nuxt-link to="/user">
+              <v-list-item-title class="link-text"> Home</v-list-item-title>
+            </nuxt-link>  
           </v-list-item-content>
         </v-list-item>
-        <v-list-item link>
+
+        <v-list-item nuxt to="/user/contact" link>
           <v-list-item-action>
             <v-icon>mdi-home</v-icon>
           </v-list-item-action>
@@ -18,6 +25,7 @@
             <v-list-item-title>Contact</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
+
         <v-list-item @click="logout" link>
           <v-list-item-action>
             <v-icon>mdi-home</v-icon>
@@ -83,16 +91,17 @@ export default {
       drawer: null,
     }),
     methods: {
-        async logout (){
-          this.$store.commit('RESET_BUSINESS')
-          await this.$auth.logout()
-        },
-        profile () {
-          this.$router.push('user/profile')
-        },
-        home () {
-          this.$router.push('user')
-        }
+      async logout({store}) {
+        this.$store.commit('SET_BUSINESS', {})
+        this.$store.commit('SET_CONTACT', {})
+        await this.$auth.logout();
+      },
+      profile () {
+        this.$router.push('user/profile')
+      },
+      home () {
+        this.$router.push('user')
+      }
     }
 }
 </script>
@@ -103,5 +112,14 @@ export default {
 .link{
   text-decoration: none;
   color: black;
+}
+.nuxt-link-exact-active{
+  text-decoration: none;
+}
+.nuxt-link-active{
+  text-decoration: none;
+}
+.link-text{
+  color:#474747;
 }
 </style>
