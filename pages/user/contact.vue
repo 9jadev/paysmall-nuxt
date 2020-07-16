@@ -13,13 +13,12 @@
                     </div>
                 </v-col>
             </v-row>
-            
+          
             <v-row>
-               
+
                 <v-col cols="12" xs="12" sm="12" md="12" lg="12">
                     <contact-list dname="Contact List"></contact-list>
                 </v-col>
-
                 <v-dialog v-model="dialog" persistent max-width="600px">
                     <v-card loading="true">
                         <v-card-title>
@@ -92,6 +91,7 @@ export default {
                 customer_phone: "",
                 business_id: this.$store.state.business.id,
             },
+            movetobusiness: this.$store.state.business.id ? true : false,
             phone: {
                 number: '',
                 valid: false,
@@ -171,6 +171,13 @@ export default {
             this.$nuxt.$loading.start()
             setTimeout(() => this.$nuxt.$loading.finish(), 500000)
         }) 
+    },
+    created(){
+        console.log(this.$store.state.business.id);
+        let bid = this.$store.state.business.id;
+        if (bid == undefined) {
+            this.$router.push('/user/Createbusinesses');
+        }
     },
     components: {
         CheckVerified , ContactList 
