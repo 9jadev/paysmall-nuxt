@@ -112,7 +112,7 @@ export default {
         autoFetchUser: true
       },
       'laravel.passport': {
-        url: 'http://127.0.0.1:8000/login',
+        url: 'https://smallpay.herokuapp.com/login',
         client_id: '1',
         client_secret: 'HmJmfSyvie1ASNufrhU9SeTjoRyklCXYKnyMPLnK'
       },
