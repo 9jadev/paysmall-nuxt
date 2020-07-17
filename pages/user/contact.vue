@@ -7,11 +7,11 @@
                         Welcome {{ this.$store.state.auth.user.firstname }}
                     </h2>
                 </v-col>
-                <v-col cols="12" xs="12" sm="4" md="4" lg="4">
+                <!-- <v-col cols="12" xs="12" sm="4" md="4" lg="4">
                     <div class="text-right">
                         <v-btn color="primary" dark @click="dialog = true">Open Dialog</v-btn>
                     </div>
-                </v-col>
+                </v-col> -->
             </v-row>
           
             <v-row>

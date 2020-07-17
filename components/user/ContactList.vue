@@ -1,86 +1,55 @@
 <template>
-  <v-card>
-    <v-card-title>
-      {{dname}}
-      <v-spacer></v-spacer>
-      <v-text-field
-        v-model="search"
-        append-icon="mdi-magnify"
-        label="Search"
-        single-line
-        hide-details
-      ></v-text-field>
-    </v-card-title>
-    <client-only>
-    <v-data-table
-      :headers="headers"
-      :items="contactlist"
-      :search="search"
-      :items-per-page="5"
-    >
-      
-    <v-spacer></v-spacer>
-    <v-dialog v-model="dialog" max-width="500px">
-      <v-card>
-        <v-card-title>
-          <span class="headline">{{ formTitle }}</span>
-        </v-card-title>
-
-        <v-card-text>
-          <v-container>
-            <v-row>
-              <v-col cols="12" sm="6" md="6">
-                  <v-text-field label="Customer Name*" :error-messages="customer_nameErrors" :disabled="loading" :loading="loading" required @input="$v.formData.customer_name.$touch()" @blur="$v.formData.customer_name.$touch()"  color="success" v-model.trim="formData.customer_name"  outlined clearable></v-text-field>
-              </v-col>
-              <v-col cols="12" sm="6" md="6">
-                  <no-ssr placeholder="loading...">
-                      <vue-tel-input  @input="onInput" :valid-characters-only="true" mode="international" :disabled="loading" v-model.trim="formData.customer_phone"  required></vue-tel-input>
-                      <span v-if="!phone.valid" style="color: red;">Invalid Phone </span>
-                  </no-ssr>
-              </v-col>
-              <v-col cols="12">
-                  <v-text-field label="Customer Email*" :error-messages="customer_emailErrors" :disabled="loading" :loading="loading" @input="$v.formData.customer_email.$touch()" @blur="$v.formData.customer_email.$touch()" color="success" v-model.trim="formData.customer_email" outlined required></v-text-field>
-              </v-col>    
-          </v-row>
-          </v-container>
-        </v-card-text>
-
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn color="blue darken-1" text @click="close">Cancel</v-btn>
-          <v-btn color="blue darken-1" text @click="save">Save</v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
-
+   <v-data-table :headers="headers" :items="contactlist" sort-by="calories" class="elevation-1">
     <template v-slot:top>
       <v-toolbar flat color="white">
-        <v-toolbar-title>My CONTACT</v-toolbar-title>
+        <v-toolbar-title>My CONTACTS</v-toolbar-title>
+        <v-divider class="mx-4" inset vertical></v-divider>
+        <v-spacer></v-spacer>
+        <v-dialog v-model="dialog" max-width="500px">
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn color="primary" dark class="mb-2" v-bind="attrs" v-on="on">New Contact</v-btn>
+          </template>
+          <v-card>
+            <v-card-title>
+              <span class="headline">{{ formTitle }}</span>
+            </v-card-title>
+
+            <v-card-text>
+              <v-container>
+                <v-row>
+                  <v-col cols="12" sm="6" md="6">
+                      <v-text-field label="Customer Name*" :error-messages="customer_nameErrors" :disabled="loading" :loading="loading" required @input="$v.formData.customer_name.$touch()" @blur="$v.formData.customer_name.$touch()"  color="success" v-model.trim="formData.customer_name"  outlined clearable></v-text-field>
+                  </v-col>
+                  <v-col cols="12" sm="6" md="6">
+                      <no-ssr placeholder="loading...">
+                          <vue-tel-input  @input="onInput" :valid-characters-only="true" mode="international" :disabled="loading" v-model.trim="formData.customer_phone"  required></vue-tel-input>
+                          <span v-if="!phone.valid" style="color: red;">Invalid Phone </span>
+                      </no-ssr>
+                  </v-col>
+                  <v-col cols="12">
+                      <v-text-field label="Customer Email*" :error-messages="customer_emailErrors" :disabled="loading" :loading="loading" @input="$v.formData.customer_email.$touch()" @blur="$v.formData.customer_email.$touch()" color="success" v-model.trim="formData.customer_email" outlined required></v-text-field>
+                  </v-col>            
+                </v-row>
+              </v-container>
+            </v-card-text>
+
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="blue darken-1" text @click="close">Cancel</v-btn>
+              <v-btn color="blue darken-1" text @click="save">Save</v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
       </v-toolbar>
     </template>
     <template v-slot:item.actions="{ item }">
-      <v-icon
-        small
-        class="mr-2"
-        @click="editItem(item)"
-      >
-        mdi-pencil
-      </v-icon>
-      <v-icon
-        small
-        @click="deleteItem(item)"
-      >
-        mdi-delete
-      </v-icon>
+      <v-icon small class="mr-2" @click="editItem(item)">mdi-pencil</v-icon>
+      <v-icon small  @click="deleteItem(item)"> mdi-delete</v-icon>
     </template>
-    <!-- <template v-slot:no-data>
+    <template v-slot:no-data>
       <v-btn color="primary" @click="initialize">Reset</v-btn>
-    </template> -->
-
-
-    </v-data-table>
-    </client-only>
-  </v-card>
+    </template>
+  </v-data-table>
 </template>
 <script>
 import { mapGetters } from 'vuex'
@@ -103,6 +72,9 @@ import { required, minLength, maxLength , email } from 'vuelidate/lib/validators
     watch:{
       phone(){
         this.phone.number = this.customer_phone;
+      },
+      dialog (val) {
+        val || this.close()
       }
     },
 
@@ -151,8 +123,11 @@ import { required, minLength, maxLength , email } from 'vuelidate/lib/validators
       editItem (item) {
         this.editedIndex = this.contactlist.indexOf(item)
         this.editedItem = Object.assign({}, item)
+        this.formData.customer_name = this.editedItem.name
+        this.formData.customer_email = this.editedItem.email
+        this.formData.customer_phone = this.editedItem.phone
         this.dialog = true
-        console.log(this.editedItem, this.dialog);
+        // console.log(this.editedItem, this.dialog);
       },
       deleteItem (item) {
         const index = this.contactlist.indexOf(item)
@@ -175,9 +150,47 @@ import { required, minLength, maxLength , email } from 'vuelidate/lib/validators
       },
       save () {
         if (this.editedIndex > -1) {
-          Object.assign(this.contactlist[this.editedIndex], this.editedItem)
+          // Object.assign(this.contactlist[this.editedIndex], this.editedItem)
+          this.$v.$touch();
+          if (this.phone.valid && (!this.$v.formData.customer_name.$invalid && !this.$v.formData.customer_email.$invalid)) {
+            console.log(this.formData);  
+            this.loading = true
+            this.$axios.setHeader('Accept', 'application/json')  
+            this.$axios.patch('/contact/'+this.editedItem.id, {
+                email: this.formData.customer_email,
+                name: this.formData.customer_name,
+                phone: this.formData.customer_phone,
+                business_id: this.formData.business_id
+            }).then((res)=> {
+                // console.log(res.data.contact, 'ckckk');
+                this.$store.dispatch('updateContacts',res.data.contact);
+                this.loading = false
+                this.close()
+            }).catch(( error ) => {
+                console.log(error.response.data);
+            }); 
+          }
         } else {
-          this.contactlist.push(this.editedItem)
+          this.$v.$touch();
+          if (this.phone.valid && (!this.$v.formData.customer_name.$invalid && !this.$v.formData.customer_email.$invalid)) {
+            console.log(this.formData);  
+            this.loading = true
+            this.$axios.setHeader('Accept', 'application/json')  
+            this.$axios.post('/contact', {
+                email: this.formData.customer_email,
+                name: this.formData.customer_name,
+                phone: this.formData.customer_phone,
+                business_id: this.formData.business_id
+            }).then((res)=> {
+                // console.log(res);
+                this.$store.dispatch('updateCon', res.data.contact);
+                this.loading = false
+                this.close()
+            }).catch(( error ) => {
+                console.log(error.response.data);
+            }); 
+          }
+          this.loading = false
         }
         this.close()
       },
@@ -185,7 +198,7 @@ import { required, minLength, maxLength , email } from 'vuelidate/lib/validators
     computed: {
       ...mapGetters(['contactlist']),
       formTitle () {
-        return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
+        return this.editedIndex === -1 ? 'New Contact' : 'Edit Contact'
       },
     sslist(){
       return this.$store.state.contacts;
@@ -210,3 +223,9 @@ import { required, minLength, maxLength , email } from 'vuelidate/lib/validators
     }
   }
 </script>
+<style scoped>
+.vue-tel-input{
+    height: 58px;
+    border-color: #9e9e9e;
+}
+</style>

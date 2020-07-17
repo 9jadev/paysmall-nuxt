@@ -20,6 +20,10 @@ export const mutations = {
     SET_BUSINESS(state, business) {
         state.business = business
     },
+    updateContacts(state, payload) {
+        // console.log('payload mutation', payload);
+        Object.assign(state.contacts[payload.id], payload.updates);
+    },
     SET_CONTACT(state, contacts) {
         state.contacts = contacts
     },
@@ -36,6 +40,11 @@ export const mutations = {
 }
 
 export const  actions = {
+    updateContacts({ commit }, payload) {
+        // console.log('payload: ', payload);
+        // delete state.tasks[id];
+        commit('updateContacts', payload);
+    },
     updateBusness({ commit }, payload){
         commit('UPDATE_BUSINESS', payload)
         // this.$axios.setHeader('Accept', 'application/json') 
