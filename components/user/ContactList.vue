@@ -1,5 +1,5 @@
 <template>
-   <v-data-table :headers="headers" :items="contactlist" sort-by="calories" class="elevation-1">
+   <v-data-table :headers="headers" :items="contactlist" sort-by="calories" :search="search" class="elevation-1">
     <template v-slot:top>
       <v-toolbar flat color="white">
         <v-toolbar-title>My CONTACTS</v-toolbar-title>
@@ -80,6 +80,7 @@ import { required, minLength, maxLength , email } from 'vuelidate/lib/validators
 
     data () {
       return {
+        search: '',
         dialog: false,
         valid: true,
         loading: false,
@@ -162,13 +163,13 @@ import { required, minLength, maxLength , email } from 'vuelidate/lib/validators
                 phone: this.formData.customer_phone,
                 business_id: this.formData.business_id
             }).then((res)=> {
-                // console.log(res.data.contact, 'ckckk');
                 this.$store.dispatch('updateContacts',res.data.contact);
                 this.loading = false
                 this.close()
             }).catch(( error ) => {
                 console.log(error.response.data);
             }); 
+            this.loading = false
           }
         } else {
           this.$v.$touch();
@@ -182,7 +183,7 @@ import { required, minLength, maxLength , email } from 'vuelidate/lib/validators
                 phone: this.formData.customer_phone,
                 business_id: this.formData.business_id
             }).then((res)=> {
-                // console.log(res);
+                // console.log(res.data.contact);
                 this.$store.dispatch('updateCon', res.data.contact);
                 this.loading = false
                 this.close()

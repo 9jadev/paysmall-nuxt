@@ -21,8 +21,14 @@ export const mutations = {
         state.business = business
     },
     updateContacts(state, payload) {
-        // console.log('payload mutation', payload);
-        Object.assign(state.contacts[payload.id], payload.updates);
+        for (var i in state.contacts) {
+            if (state.contacts[i].id == payload.id) {
+                state.contacts[i].name = payload.name
+                state.contacts[i].email = payload.email
+                state.contacts[i].phone = payload.phone
+               break; 
+            }
+        }
     },
     SET_CONTACT(state, contacts) {
         state.contacts = contacts
@@ -41,23 +47,11 @@ export const mutations = {
 
 export const  actions = {
     updateContacts({ commit }, payload) {
-        // console.log('payload: ', payload);
-        // delete state.tasks[id];
+        console.log('actionpayload: ', payload);
         commit('updateContacts', payload);
     },
     updateBusness({ commit }, payload){
         commit('UPDATE_BUSINESS', payload)
-        // this.$axios.setHeader('Accept', 'application/json') 
-        // this.$axios.put(`/businesses/${payload.id}`, payload).then((res)=> {
-        // //    console.log(res.data.business)
-        //     // this.dialog = true
-        // }).catch((error) => {
-        //     console.log(error.response.data);
-        //     this.errors = error.response.data
-        //     this.errorsnackbar = true
-        //     this.errormess = error.response.data.message
-        //     this.loading = false
-        // })  
         console.log("i just commited")
     },
     updateCon({commit}, payload){
