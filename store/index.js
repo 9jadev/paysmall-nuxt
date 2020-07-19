@@ -30,6 +30,14 @@ export const mutations = {
             }
         }
     },
+    deleteContacts(state, payload){
+        for (var i in state.contacts) {
+            if (state.contacts[i].id == payload) {
+               state.contacts.splice(i, 1); 
+               break; 
+            }
+        }
+    },
     SET_CONTACT(state, contacts) {
         state.contacts = contacts
     },
@@ -56,5 +64,9 @@ export const  actions = {
     },
     updateCon({commit}, payload){
         commit('UPDATECON',payload)
-    }
+    },
+    deleteContacts({ commit }, payload) {
+        console.log('deleteContacts: ', payload);
+        commit('deleteContacts', payload);
+    },
 }

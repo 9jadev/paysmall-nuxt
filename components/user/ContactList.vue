@@ -132,7 +132,18 @@ import { required, minLength, maxLength , email } from 'vuelidate/lib/validators
       },
       deleteItem (item) {
         const index = this.contactlist.indexOf(item)
-        confirm('Are you sure you want to delete this item?') && this.contactlist.splice(index, 1)
+        confirm('Are you sure you want to delete this item?') && this.deletedata(item)
+      },
+      deletedata(item) {
+        this.$axios.setHeader('Accept', 'application/json')  
+        this.$axios.delete('/contact/'+item.id).then((res)=> {
+            this.$store.dispatch('deleteContacts',item.id);
+            // console.log(res)
+            this.loading = false
+            this.close()
+        }).catch(( error ) => {
+            console.log(error.response.data);
+        });
       },
       close () {
         this.dialog = false
