@@ -60,8 +60,8 @@ export default {
   ** See https://axios.nuxtjs.org/options
   */
   axios: {
-    // baseURL: 'https://smallpay.herokuapp.com/api',
-    baseURL: 'http://127.0.0.1:8000/api',
+    baseURL: 'https://smallpay.herokuapp.com/api',
+    // baseURL: 'http://127.0.0.1:8000/api',
     // baseURL: 'https://smallpaystage.herokuapp.com/api',
   },
   /*
