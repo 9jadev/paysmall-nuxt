@@ -121,7 +121,7 @@ export default {
         } else {
             try {
                 let response = await this.$auth.loginWith('local', { data: this.formData })
-               // console.log(response)
+               console.log(response)
                 this.loading = false
                 // window.location.assign("/user");
                 // this.$router.push('/user')

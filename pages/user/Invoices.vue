@@ -7,28 +7,26 @@
                         Welcome {{ this.$store.state.auth.user.firstname }}
                     </h2>
                 </v-col>
-                <!-- <v-col cols="12" xs="12" sm="4" md="4" lg="4">
+                <v-col cols="12" xs="12" sm="4" md="4" lg="4">
                     <div class="text-right">
-                        <v-btn color="primary" dark @click="dialog = true">Open Dialog</v-btn>
+                        <v-btn rounded color="success" dark><v-icon dark>mdi-plus</v-icon>Create Invoice</v-btn>
                     </div>
-                </v-col> -->
-            </v-row>
-          
-            <v-row>
-
-                <v-col cols="12" xs="12" sm="12" md="12" lg="12">
-                    <contact-list dname="Contact List"></contact-list>
                 </v-col>
-                
+            </v-row>
+            <v-row>
+                <v-col cols="12" xs="12" sm="12" md="12" lg="12">
+                    <invoice-list dname="Contact List"></invoice-list>
+                </v-col>
             </v-row>
         </v-container>
     </v-layout>
 </template>
+
 <script>
 import { validationMixin } from 'vuelidate'
 import { required, minLength, maxLength , email } from 'vuelidate/lib/validators' 
 import CheckVerified from '~/components/user/CheckVerified.vue'
-import ContactList from '~/components/user/ContactList.vue'
+import InvoiceList from '~/components/user/InvoiceList.vue'
 export default {
     middleware: 'auth',
     layout: 'user',
@@ -147,7 +145,7 @@ export default {
         }
     },
     components: {
-        CheckVerified , ContactList 
+        CheckVerified , InvoiceList 
     },
     computed:{
         customer_nameErrors (){

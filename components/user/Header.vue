@@ -26,6 +26,15 @@
           </v-list-item-content>
         </v-list-item>
 
+        <v-list-item nuxt to="/user/invoices" link>
+          <v-list-item-action>
+            <v-icon>mdi-home</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>Invoices</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
         <v-list-item @click="logout" link>
           <v-list-item-action>
             <v-icon>mdi-home</v-icon>
@@ -69,7 +78,6 @@
                 </v-list-item-title>
               </v-list-item>
             </v-list>
-
             <v-list>
               <v-list-item>
                 <v-list-item-title  @click="logout"> Logout </v-list-item-title>
