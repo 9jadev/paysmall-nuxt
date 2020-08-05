@@ -15,7 +15,6 @@
             </v-btn>
             <v-btn color="primary" class=" mb-2" dark large>
                 Print data
-                <v-icon dark right>mdi-cancel</v-icon>
             </v-btn>
         </div>
     </div>
