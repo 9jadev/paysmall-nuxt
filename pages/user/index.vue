@@ -9,7 +9,7 @@
                 </v-col>
                 <v-col cols="12" xs="12" sm="4" md="4" lg="4">
                     <div class="text-right">
-                        <v-btn rounded color="success" dark><v-icon dark>mdi-plus</v-icon>Invoice</v-btn>
+                        <v-btn rounded color="success" to="user/invoices" dark><v-icon dark>mdi-plus</v-icon>Invoice</v-btn>
                         <v-btn rounded color="primary" dark><v-icon dark>mdi-plus</v-icon>Contact</v-btn>
                     </div>
                 </v-col>

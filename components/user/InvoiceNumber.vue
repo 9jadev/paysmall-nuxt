@@ -6,7 +6,7 @@ export default {
     props: ['amount'],
     computed: {
         format_amount(){
-            return new Intl.NumberFormat({ style: 'currency', currency: 'EUR' }).format(0)
+            return new Intl.NumberFormat({ style: 'currency', currency: 'EUR' }).format(this.amount)
             // return 10000;
         }
     },
