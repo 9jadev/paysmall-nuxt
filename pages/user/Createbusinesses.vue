@@ -282,7 +282,7 @@ export default {
        business_aboutErrors(){
          const errors = [] 
         if (!this.$v.formData.business_about.$dirty) return errors
-        !this.$v.formData.business_about.maxLength && errors.push(`This must be at most 12 characters long`)
+        !this.$v.formData.business_about.maxLength && errors.push(`This must be at most 500 characters long`)
         !this.$v.formData.business_about.required && errors.push('This is required.')
         return errors
       },

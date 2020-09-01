@@ -7,11 +7,12 @@
             Not Completed
         </v-btn>
         
+        
     </span>    
 </template>
 <script>
 export default {
-    props: ['completed'],
+    props: ['completed','id'],
     computed: {
         format_amount(){
             return new Intl.NumberFormat({ style: 'currency', currency: 'EUR' }).format(0)

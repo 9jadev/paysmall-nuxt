@@ -147,31 +147,31 @@ export default {
             this.snackbar = true
             this.loading = false
         } else {
-                this.loading = true
-                this.errormess = ''
-                this.errorsnackbar = false 
-                // // console.log(this.formData);
-                this.$axios.setHeader('Accept', 'application/json')  
-                await this.$axios.post('/password/reset', this.formData).then((res)=> {
-                        console.log(res)
-                        this.successmessage = res.data.message
-                        this.alert = true
-                        // this.$router.push("/login");
+            this.loading = true
+            this.errormess = ''
+            this.errorsnackbar = false 
+            // // console.log(this.formData);
+            this.$axios.setHeader('Accept', 'application/json')  
+            await this.$axios.post('/password/reset', this.formData).then((res)=> {
+                    console.log(res)
+                    this.successmessage = res.data.message
+                    this.alert = true
+                    // this.$router.push("/login");
+                this.loading = false
+            }).catch(( error )=> {
+                if (error.response.data) {
+                    this.errors = error.response.data
+                    this.errormess = error.response.data
+                    this.errorsnackbar = true  
                     this.loading = false
-                }).catch(( error )=> {
-                    if (error.response.data) {
-                       this.errors = error.response.data
-                       this.errormess = error.response.data
-                       this.errorsnackbar = true  
-                       this.loading = false
-                    }
-                    if(error.response.data.error){
-                      this.errormess = error.response.data.error
-                      this.errorsnackbar = true
-                      this.loading = false
-                    }
-                    
-                });
+                }
+                if(error.response.data.error){
+                    this.errormess = error.response.data.error
+                    this.errorsnackbar = true
+                    this.loading = false
+                }
+                
+            });
         }
     }
   },

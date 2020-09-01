@@ -9,7 +9,7 @@
                 </v-col>
                 <v-col cols="12" xs="12" sm="4" md="4" lg="4">
                     <div class="text-right">
-                        <v-btn rounded color="success" dark><v-icon dark>mdi-plus</v-icon>Create Invoice</v-btn>
+                        <v-btn rounded color="success" to="CreateInvoice" dark><v-icon dark>mdi-plus</v-icon>Create Invoice</v-btn>
                     </div>
                 </v-col>
             </v-row>
@@ -23,8 +23,6 @@
 </template>
 
 <script>
-import { validationMixin } from 'vuelidate'
-import { required, minLength, maxLength , email } from 'vuelidate/lib/validators' 
 import CheckVerified from '~/components/user/CheckVerified.vue'
 import InvoiceList from '~/components/user/InvoiceList.vue'
 export default {
@@ -33,35 +31,11 @@ export default {
     loading: {
         color: 'blue',
     },
-    mixins: [validationMixin], 
-    validations: {
-        formData:{
-            customer_name: {
-                required
-            },
-            customer_email: {
-                required,
-                email
-            }
-        }
-    },
     data(){
         return {
-            dialog: false,
-            valid: true,
-            loading: false,
-            formData: {
-                customer_name: "",
-                customer_email: "",
-                customer_phone: "",
-                business_id: this.$store.state.business.id,
-            },
+            
             movetobusiness: this.$store.state.business.id ? true : false,
-            phone: {
-                number: '',
-                valid: false,
-                country: '',
-            },
+      
         }
     },
     watch:{
@@ -74,62 +48,8 @@ export default {
         color: '#3B8070',
         background: 'white'
     },
-    // async fetch({$axios, store, redirect }){
-    //     // let business = this.$store.state.business.id;
-    //     $axios.setHeader('Accept', 'application/json')
-    //     let token = localStorage.getItem('auth._token.local')
-    //     $axios.setHeader('Authorization', token)
-    //     // console.log(token)
-    //     await $axios.get('/businesses').then((res)=> {
-    //     let result = res.data 
-    //     if (result.status == false) {
-    //            return redirect('/user/Createbusinesses')
-    //         } else {
-    //             // console.log(result.business);
-    //             store.commit('SET_BUSINESS', result.business)
-    //         }
-    //     })
-    // },
     methods: {
-        submit(){
-            this.$v.$touch();
-            if (this.phone.valid && (!this.$v.formData.customer_name.$invalid && !this.$v.formData.customer_email.$invalid)) {
-                console.log(this.formData);  
-                this.loading = true
-                this.$axios.setHeader('Accept', 'application/json')  
-                this.$axios.post('/contact', {
-                    email: this.formData.customer_email,
-                    name: this.formData.customer_name,
-                    phone: this.formData.customer_phone,
-                    business_id: this.formData.business_id
-                }).then((res)=> {
-                    // console.log(res);
-                    this.$store.dispatch('updateCon', res.data.contact);
-                    this.loading = false
-                    this.close()
-                }).catch(( error ) => {
-                    console.log(error.response.data);
-                }); 
-            }
-            this.loading = false
-        },
-        close(){
-            this.formData.customer_name = "";
-            this.formData.customer_email = "";
-            this.formData.customer_phone = "";
-            this.phone.number = "";
-            this.phone.valid = false;
-            this.phone.country = "";
-            this.dialog = false
-        },
-        onInput(formattedNumber, { number, valid, country }) {
-            this.phone.number = number.international;
-            this.phone.valid = valid;
-            this.phone.country = country && country.name;
-            if (valid == true) {
-                this.disabled = false
-            }
-        }
+        
     },
     mounted() {
         this.$nextTick(() => {
@@ -147,21 +67,7 @@ export default {
     components: {
         CheckVerified , InvoiceList 
     },
-    computed:{
-        customer_nameErrors (){
-            const errors = []
-            if (!this.$v.formData.customer_name.$dirty) return errors
-            !this.$v.formData.customer_name.required && errors.push(' Customer name is required')
-            return errors
-        },
-        customer_emailErrors () {
-            const errors = []
-            if (!this.$v.formData.customer_email.$dirty) return errors
-            !this.$v.formData.customer_email.email && errors.push('Must be valid e-mail')
-            !this.$v.formData.customer_email.required && errors.push('E-mail is required')
-            return errors
-      }
-    }
+    
 }
 </script>
 <style scoped>

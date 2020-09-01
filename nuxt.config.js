@@ -5,7 +5,8 @@ export default {
   generate: {
     fallback: true,
     routes: [
-      '/ResetPassword/token'
+      '/ResetPassword/token',
+      '/user/EditInvoice/id'
     ]
   },
   /*
