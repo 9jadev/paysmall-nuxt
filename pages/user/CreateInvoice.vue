@@ -123,6 +123,7 @@ export default {
                 // this.$store.dispatch('updateCon', res.data.contact);
                 this.loading = false
                 // this.close()
+                this.$router.push('invoices')
             }).catch(( error ) => {
                 console.log(error.response.data);
             }); 

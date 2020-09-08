@@ -35,7 +35,7 @@
 import InvoiceNumber from '~/components/user/InvoiceNumber.vue'
 import InvoiceCompleted from '~/components/user/InvoiceCompleted.vue'
 import InvoiceAbout from '~/components/user/InvoiceAbout.vue'
-import InvoiceLatest from '~/components/user/InvoiceLatest.vue'
+import InvoiceLatest from '~/components/user/Invoicelatest.vue'
  export default {
     components: {InvoiceLatest, InvoiceNumber , InvoiceCompleted , InvoiceAbout},
     data () {

@@ -55,6 +55,7 @@ export default {
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
     '@nuxtjs/auth',
+    'vue-social-sharing/nuxt',
   ],
   /*
   ** Axios module configuration

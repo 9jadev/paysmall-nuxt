@@ -20,7 +20,7 @@
                             <v-col cols="12" sm="6" xs="12">
                                 <v-text-field label="First name" v-model.trim="formData.firstname" :error-messages="firstnameErrors" :counter="12" required @input="$v.formData.firstname.$touch()" @blur="$v.formData.firstname.$touch()" color="success" :loading="loading" :disabled="loading" outlined clearable></v-text-field>
                                 <div class="errors" v-if="errors">
-                                    <p class="red--text text--lighten-1 mb-1" :key="index" v-for="(error , index) in errors.errors.firstname">{{error}} </p>
+                                    <p class="red--text text--lighten-1 mb-1" :key="index" v-for="(error , index) in errors.errors.firstname"> {{error}} </p>
                                 </div>
                             </v-col>
                             <v-col cols="12" sm="6" xs="12">

@@ -119,7 +119,7 @@ export default {
         if (result.status == false) {
                return redirect('/user/Createbusinesses')
             } else {
-                // console.log(result.business);
+                console.log(result.business);
                 store.commit('SET_BUSINESS', result.business)
                 store.commit('SET_CONTACT', result.contacts)
             }
