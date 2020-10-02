@@ -153,10 +153,10 @@ export default {
             // // console.log(this.formData);
             this.$axios.setHeader('Accept', 'application/json')  
             await this.$axios.post('/password/reset', this.formData).then((res)=> {
-                    console.log(res)
-                    this.successmessage = res.data.message
-                    this.alert = true
-                    // this.$router.push("/login");
+                console.log(res)
+                this.successmessage = res.data.message
+                this.alert = true
+                // this.$router.push("/login");
                 this.loading = false
             }).catch(( error )=> {
                 if (error.response.data) {

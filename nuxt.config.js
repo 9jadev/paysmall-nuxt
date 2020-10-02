@@ -6,7 +6,9 @@ export default {
     fallback: true,
     routes: [
       '/ResetPassword/token',
-      '/user/EditInvoice/id'
+      '/user/EditInvoice/id',
+      '/payements/serial',
+      '/payements/Payment/invoice',
     ]
   },
   /*
@@ -39,7 +41,8 @@ export default {
   plugins: [
     '~/plugins/vue-tel-input',
     {src: '~/plugins/vuelidate', mode: 'client'},
-    { src: '~/plugins/vuex-persist', ssr: false }
+    {src: '~/plugins/vuex-persist', ssr: false },
+    {src: '~/plugins/flutterwave', ssr: false}
   ],
   /*
   ** Nuxt.js dev-modules
@@ -62,8 +65,8 @@ export default {
   ** See https://axios.nuxtjs.org/options
   */
   axios: {
-    // baseURL: 'https://smallpay.herokuapp.com/api',
-    baseURL: 'http://127.0.0.1:8000/api',
+    baseURL: 'https://smallpay.herokuapp.com/api',
+    // baseURL: 'http://127.0.0.1:8000/api',
     // baseURL: 'https://smallpaystage.herokuapp.com/api',
   },
   /*
@@ -131,6 +134,7 @@ export default {
     cloudUrl: process.env.cloudUrl || 'https://api.cloudinary.com/v1_1/examqueat/image/upload',
     accountVerify: process.env.accountVerify || 'https://api.ravepay.co/flwv3-pug/getpaidx/api/resolve_account',
     PBFPubKey: process.env.PBFPubKey || 'FLWPUBK-b40c00896a8507cf67d23e1fe0b7cded-X',
+    SEFKey: process.env.SEFKey || 'FLWSECK_TEST-322f902348c9f9099a14640d26961b77-X',
     Backend: process.env.Backend || 'http://127.0.0.1:8000'
   }
 }  
