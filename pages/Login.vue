@@ -118,14 +118,14 @@ export default {
             this.timeout = 3000
             this.snackbar = true
             this.loading = false
-        } else {
-            try {
-                let response = await this.$auth.loginWith('local', { data: this.formData })
-            //    console.log(response)
+                // console.log(response)
                 // this.loading = false
                 // window.location.assign("/user");
                 // this.$router.push('/user')
                 
+        } else {
+            try {
+                let response = await this.$auth.loginWith('local', { data: this.formData })    
             } catch (err) {
                 // console.log(err);
                 this.timeout = 6000
