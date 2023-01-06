@@ -17,7 +17,7 @@
     "awesome-phonenumber": "^2.30.0",
     "axios": "^0.19.2",
     "countup.js": "^2.0.5",
-    "nuxt": "^2.0.0",
+    "nuxt": "^2.15.8",
     "sweetalert": "^2.1.2",
     "vue-countup-v2": "^4.0.0",
     "vue-flutterwave": "^1.0.0",
